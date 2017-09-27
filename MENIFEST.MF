@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Bundle-Name: NumberFalling
+Build-Jdk: 1.6.0
+Bundle-Version: 1.0.0
+
