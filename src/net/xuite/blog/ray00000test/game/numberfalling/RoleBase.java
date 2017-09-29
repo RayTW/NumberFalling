@@ -1,5 +1,7 @@
 package net.xuite.blog.ray00000test.game.numberfalling;
 
+import java.awt.Graphics;
+
 import net.xuite.blog.ray00000test.game.event.OnEventListener;
 
 /**
@@ -18,8 +20,10 @@ public abstract class RoleBase {
 
 	private int mPaintCount;// 此物件被繪幾次才執行本身的變動mehtod
 	private int mPaintCountdown;
+	private boolean mIsAlive;
 
 	public RoleBase() {
+		mIsAlive = true;
 	}
 
 	/**
@@ -114,6 +118,10 @@ public abstract class RoleBase {
 		return mW;
 	}
 	
+	public int getScore(){
+		return 0;
+	}
+	
 	public void setX(int x){
 		mX = x;
 	}
@@ -129,8 +137,19 @@ public abstract class RoleBase {
 	public void setH(int h){
 		mH = h;
 	}
-
-	public void close() {
-		mOnEventListener = null;
+	
+	public boolean isAlive(){
+		return mIsAlive;
 	}
+
+	/**
+	 * 將物件狀態設為不存活
+	 */
+	public void release() {
+		mOnEventListener = null;
+		mIsAlive = false;
+	}
+	
+	public abstract void onDraw(Graphics g);
+	public abstract int getId();
 }

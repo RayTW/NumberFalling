@@ -1,5 +1,7 @@
 package net.xuite.blog.ray00000test.game.numberfalling;
 
+import java.awt.Graphics;
+
 /**
  * 接數字的盤子
  * 
@@ -7,7 +9,6 @@ package net.xuite.blog.ray00000test.game.numberfalling;
  * 
  */
 public class Basket extends RoleBase {
-
 	public Basket() {
 	}
 
@@ -17,5 +18,15 @@ public class Basket extends RoleBase {
 
 	@Override
 	public void process() {
+	}
+
+	@Override
+	public void onDraw(Graphics g) {
+		g.fillRect(getX(), getY(), getW(), getH());		
+	}
+
+	@Override
+	public int getId() {
+		return RoleIdentity.ID_BASKET;
 	}
 }

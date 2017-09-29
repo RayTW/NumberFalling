@@ -51,13 +51,4 @@ public class NumberFallingGame extends JFrame implements MouseMotionListener {
 	public void mouseMoved(MouseEvent arg0) {
 		mFruitCanvas.setMouseMoveBasketX(arg0.getX());
 	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		NumberFallingGame game = new NumberFallingGame();
-		game.setBounds(100, 100, 530, 320);
-		game.setVisible(true);
-	}
 }

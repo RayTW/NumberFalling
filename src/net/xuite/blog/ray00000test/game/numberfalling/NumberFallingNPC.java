@@ -1,5 +1,7 @@
 package net.xuite.blog.ray00000test.game.numberfalling;
 
+import java.awt.Graphics;
+
 /**
  * 丟出數字，在最上面移動的npc
  * 
@@ -12,12 +14,8 @@ public class NumberFallingNPC extends RoleBase {
 	private int mNumberFallingTime;// 下次丟數字的時間
 
 	public NumberFallingNPC() {
-		ThrowFruitNPCInit();
-		mMovePix = 1;
-	}
-
-	public void ThrowFruitNPCInit() {
 		mMoveRight = true;
+		mMovePix = 1;
 	}
 
 	@Override
@@ -48,5 +46,15 @@ public class NumberFallingNPC extends RoleBase {
 
 	public void setMovePix(int pix) {
 		mMovePix = pix;
+	}
+
+	@Override
+	public void onDraw(Graphics g) {
+		g.fillRect(getX(), getY(), getW(), getH());		
+	}
+
+	@Override
+	public int getId() {
+		return RoleIdentity.ID_NUMBER_FALLING_NPC;
 	}
 }

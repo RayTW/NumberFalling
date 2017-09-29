@@ -59,40 +59,43 @@ public class GameCanvas extends CanvasDoulbebufferBase implements
 		for (int i = mObjs.size() - 1; i >= 0; i--) {
 			RoleBase obj = mObjs.get(i);
 			obj.countdown();
+			obj.onDraw(g);
+			hitTestBasket(obj, mBasket);
+		}
+		
+		// 畫上吃到的數字總分
+		g.drawString("Score:" + mScore, 0, 280);
+		
+		clearUnaliveRoles();
+	}
+	
+	private void hitTestBasket(RoleBase obj, RoleBase basket){
+		if(obj.getId() == RoleIdentity.ID_NUMBER_OBJECT){
+			// 判斷數字是否碰到籃子
+			if (obj.hitTest(basket)) {
+				obj.release();
+				mScore += obj.getScore();// 加上吃到的數字分數
+				return;
+			}
 
-			// 畫數字
-			if (obj instanceof NumberObject) {
-				NumberObject fruit = (NumberObject) obj;
-
-				g.setColor(fruit.getColor());
-				g.drawString(String.valueOf(fruit.getScore()), fruit.getX(),
-						fruit.getY());// 畫出數字分數
-				g.setColor(Color.BLACK);
-				// 判斷數字是否碰到籃子
-				if (fruit.hitTest(mBasket)) {
-					mObjs.remove(i);
-					fruit.close();
-					// System.out.println("吃到數字");
-					mScore += fruit.getScore();// 加上吃到的數字分數
-					continue;
-				}
-
-				if (fruit.getY() >= 320) {
-					mObjs.remove(i);
-					fruit.close();
-				}
-
-			} else if (obj instanceof Basket) { // 畫籃子
-				Basket b = (Basket) obj;
-				g.fillRect(b.getX(), b.getY(), b.getW(), b.getH());
-			} else if (obj instanceof NumberFallingNPC) {// 畫丟數字npc
-				NumberFallingNPC b = (NumberFallingNPC) obj;
-				g.fillRect(b.getX(), b.getY(), b.getW(), b.getH());
+			if (getY() >= 320) {
+				obj.release();
 			}
 		}
-
-		// 畫上吃到的數字總分
-		g.drawString("總分:" + mScore, 0, 280);
+	}
+	
+	//清除不應存在畫面上的角色物件
+	private void clearUnaliveRoles(){
+		RoleBase obj = null;
+		
+		for (int i = mObjs.size() - 1; i >= 0; i--) {
+			obj = mObjs.get(i);
+			
+			if(!obj.isAlive()){
+				mObjs.remove(i);
+				System.out.println("移除obj="+obj.hashCode());
+			}
+		}
 	}
 
 	@Override
