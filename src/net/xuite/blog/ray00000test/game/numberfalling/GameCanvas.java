@@ -70,7 +70,7 @@ public class GameCanvas extends CanvasDoulbebufferBase implements
 	}
 	
 	private void hitTestBasket(RoleBase obj, RoleBase basket){
-		if(obj.getId() == RoleIdentity.ID_NUMBER_OBJECT){
+		if(obj.getId() == GameConfig.ID_NUMBER_OBJECT){
 			// 判斷數字是否碰到籃子
 			if (obj.hitTest(basket)) {
 				obj.release();
@@ -93,7 +93,6 @@ public class GameCanvas extends CanvasDoulbebufferBase implements
 			
 			if(!obj.isAlive()){
 				mObjs.remove(i);
-				System.out.println("移除obj="+obj.hashCode());
 			}
 		}
 	}
@@ -104,8 +103,8 @@ public class GameCanvas extends CanvasDoulbebufferBase implements
 			NumberObject f = new NumberObject();
 			f.setPaintCountdown(5);// 設定畫5次就變一次顏色
 			f.setX(mNpc.getX());
-			f.setW(10);
-			f.setH(10);
+			f.setW(25);
+			f.setH(25);
 			f.randScore();
 
 			addPaintObj(f);

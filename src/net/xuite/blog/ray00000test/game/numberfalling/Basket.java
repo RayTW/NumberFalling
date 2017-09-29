@@ -27,6 +27,6 @@ public class Basket extends RoleBase {
 
 	@Override
 	public int getId() {
-		return RoleIdentity.ID_BASKET;
+		return GameConfig.ID_BASKET;
 	}
 }

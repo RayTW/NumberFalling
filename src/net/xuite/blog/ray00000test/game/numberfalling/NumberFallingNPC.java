@@ -29,17 +29,19 @@ public class NumberFallingNPC extends RoleBase {
 			setX(getX() + mMovePix);
 			if (getX() >= 480) {
 				mMoveRight = false;
+				NumberObject.mVelocityX = -NumberObject.mVelocityX;
 			}
 		} else {
 			setX(getX() - mMovePix);
 			if (getX() <= 0) {
 				mMoveRight = true;
+				NumberObject.mVelocityX = -NumberObject.mVelocityX;
 			}
 		}
 
 		mNumberFallingTime--;
 		if (mNumberFallingTime <= 0) {
-			mNumberFallingTime = (int) (Math.random() * 10) + 10;// npc下次丟出數字的間隔時間
+			mNumberFallingTime = (int) (Math.random() * 50) + 10;// npc下次丟出數字的間隔時間
 			notifyEvent(GameEvent.POP_NUMBER, null);// 通知上層產生數字物件
 		}
 	}
@@ -55,6 +57,6 @@ public class NumberFallingNPC extends RoleBase {
 
 	@Override
 	public int getId() {
-		return RoleIdentity.ID_NUMBER_FALLING_NPC;
+		return GameConfig.ID_NUMBER_FALLING_NPC;
 	}
 }
