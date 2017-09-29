@@ -18,7 +18,7 @@ import net.xuite.blog.ray00000test.game.event.OnEventListener;
 public class GameCanvas extends CanvasDoulbebufferBase implements
 		OnEventListener<GameEvent> {
 	private static final long serialVersionUID = 8209868821288883028L;
-	private List<PaintObjBase> mObjs;
+	private List<RoleBase> mObjs;
 	private NumberFallingNPC mNpc; // 丟數字的npc
 	private Basket mBasket; // 接方塊的籃子
 	private int mScore; // 吃到的數字個數
@@ -28,7 +28,7 @@ public class GameCanvas extends CanvasDoulbebufferBase implements
 	}
 
 	public void inititalize() {
-		mObjs = Collections.synchronizedList(new ArrayList<PaintObjBase>());
+		mObjs = Collections.synchronizedList(new ArrayList<RoleBase>());
 
 		mBasket = new Basket();
 		mBasket.setParent(this);
@@ -50,14 +50,14 @@ public class GameCanvas extends CanvasDoulbebufferBase implements
 	 * 
 	 * @param obj
 	 */
-	public void addPaintObj(PaintObjBase obj) {
+	public void addPaintObj(RoleBase obj) {
 		mObjs.add(obj);
 	}
 
 	@Override
 	public void paintCanvas(Graphics g) {
 		for (int i = mObjs.size() - 1; i >= 0; i--) {
-			PaintObjBase obj = mObjs.get(i);
+			RoleBase obj = mObjs.get(i);
 			obj.countdown();
 
 			// 畫數字

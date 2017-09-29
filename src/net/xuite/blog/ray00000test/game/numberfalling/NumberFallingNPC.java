@@ -6,7 +6,7 @@ package net.xuite.blog.ray00000test.game.numberfalling;
  * @author Ray
  * 
  */
-public class NumberFallingNPC extends PaintObjBase {
+public class NumberFallingNPC extends RoleBase {
 	private boolean mMoveRight; // 記錄目前是否右移中,true:右移,false:左移
 	private int mMovePix; // 移動的畫素(盡量不設定此變數，否則會npc移動會跳格)
 	private int mNumberFallingTime;// 下次丟數字的時間

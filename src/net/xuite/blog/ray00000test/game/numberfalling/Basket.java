@@ -6,7 +6,7 @@ package net.xuite.blog.ray00000test.game.numberfalling;
  * @author Ray
  * 
  */
-public class Basket extends PaintObjBase {
+public class Basket extends RoleBase {
 
 	public Basket() {
 	}

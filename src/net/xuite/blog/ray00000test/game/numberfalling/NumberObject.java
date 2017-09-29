@@ -8,7 +8,7 @@ import java.awt.Color;
  * @author Ray
  * 
  */
-public class NumberObject extends PaintObjBase {
+public class NumberObject extends RoleBase {
 	private boolean mColorFlag;
 	private Color mColor;
 	private int mScore; // 數字的分數
