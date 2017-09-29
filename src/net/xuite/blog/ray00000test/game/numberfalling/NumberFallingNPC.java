@@ -29,19 +29,20 @@ public class NumberFallingNPC extends RoleBase {
 			setX(getX() + mMovePix);
 			if (getX() >= 480) {
 				mMoveRight = false;
-				NumberObject.mVelocityX = -NumberObject.mVelocityX;
+				notifyEvent(GameEvent.NPC_OUT_RIGHT, null);
 			}
 		} else {
 			setX(getX() - mMovePix);
 			if (getX() <= 0) {
 				mMoveRight = true;
-				NumberObject.mVelocityX = -NumberObject.mVelocityX;
+				notifyEvent(GameEvent.NPC_OUT_LEFT, null);
 			}
 		}
 
 		mNumberFallingTime--;
 		if (mNumberFallingTime <= 0) {
-			mNumberFallingTime = (int) (Math.random() * 50) + 10;// npc下次丟出數字的間隔時間
+			mNumberFallingTime = (int) (Math.random() * GameConfig.NUMBER_FALLING_TIME_RANDOM_MAX_DEFAULT)
+					+ GameConfig.NUMBER_FALLING_TIME_BASIC_MIN_DEFAULT;// npc下次丟出數字的間隔時間
 			notifyEvent(GameEvent.POP_NUMBER, null);// 通知上層產生數字物件
 		}
 	}
@@ -52,7 +53,7 @@ public class NumberFallingNPC extends RoleBase {
 
 	@Override
 	public void onDraw(Graphics g) {
-		g.fillRect(getX(), getY(), getW(), getH());		
+		g.fillRect(getX(), getY(), getW(), getH() / 2);	
 	}
 
 	@Override

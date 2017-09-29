@@ -13,11 +13,7 @@ public class NumberObject extends RoleBase {
 	private int mColorFlag;
 	private Color mColor;
 	private int mScore; // 數字的分數
-	private int mAccelerationY = 1;    // Y方向加速度，設一個合理的數字  
-	private int mVelocityY = 1;        // Y方向原始速度 隨你設 
-	public static int mVelocityX = 12;       // X方向原始速度 隨你設 
-	private static final int mProcessCountDefault = 2;
-	private int mProcessCount = mProcessCountDefault;
+	private int mProcessCount;
 	
 
 	public NumberObject() {
@@ -25,7 +21,8 @@ public class NumberObject extends RoleBase {
 	}
 
 	public void inititalize() {
-		mColorFlag = 0;
+		mColorFlag = (int)(Math.random() * GameConfig.NUMBER_OBJECT_COLORS.length);
+		mProcessCount = GameConfig.PROCESS_COUNT_DEFAULT;
 	}
 
 	@Override
@@ -52,7 +49,7 @@ public class NumberObject extends RoleBase {
 	public void process() {
 		mProcessCount--;
 		if(mProcessCount <= 0){
-			mProcessCount = mProcessCountDefault;
+			mProcessCount = GameConfig.PROCESS_COUNT_DEFAULT;
 			setX(getX() + mVelocityX);
 			mVelocityY += mAccelerationY; 
 			setY(getY()+ mVelocityY);
@@ -63,6 +60,7 @@ public class NumberObject extends RoleBase {
 		return mColor;
 	}
 
+	@Override
 	public int getScore() {
 		return mScore;
 	}
@@ -71,9 +69,9 @@ public class NumberObject extends RoleBase {
 	public void onDraw(Graphics g) {
 		g.setColor(getColor());
 		g.fillArc(getX(), getY(), getW(), getH(),0,360);
-//		g.drawString(String.valueOf(getScore()), getX(),
-//				getY());// 畫出數字分數
 		g.setColor(Color.BLACK);
+		g.drawString(String.valueOf(getScore()), getX() + (getW() / 2),
+				getY() + (int)( (((getH() * 1.0)  / 1.4) * 10)) / 10);// 畫出數字分數
 	}
 
 	@Override

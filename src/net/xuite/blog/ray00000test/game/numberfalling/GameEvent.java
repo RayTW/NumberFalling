@@ -6,7 +6,9 @@ package net.xuite.blog.ray00000test.game.numberfalling;
  * 
  */
 public enum GameEvent {
-	POP_NUMBER("pop_number");
+	POP_NUMBER("popNumber"),
+	NPC_OUT_RIGHT("npcOutRight"),
+	NPC_OUT_LEFT("npcOutLEFT");
 
 	private final String mValue;
 

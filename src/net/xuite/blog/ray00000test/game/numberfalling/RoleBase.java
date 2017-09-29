@@ -22,6 +22,10 @@ public abstract class RoleBase {
 	private int mPaintCountdown;
 	private boolean mIsAlive;
 
+	protected int mAccelerationY = 1;    // Y方向加速度，設一個合理的數字  
+	protected int mVelocityY = 1;        // Y方向原始速度 隨你設 
+	protected int mVelocityX = 0;       // X方向原始速度 隨你設 
+	
 	public RoleBase() {
 		mIsAlive = true;
 	}
@@ -136,6 +140,10 @@ public abstract class RoleBase {
 	
 	public void setH(int h){
 		mH = h;
+	}
+	
+	public void setVelocityX(int velocityX){
+		mVelocityX = velocityX;
 	}
 	
 	public boolean isAlive(){

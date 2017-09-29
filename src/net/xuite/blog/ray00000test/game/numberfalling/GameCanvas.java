@@ -1,10 +1,10 @@
 package net.xuite.blog.ray00000test.game.numberfalling;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import net.xuite.blog.ray00000test.game.canvas.CanvasDoulbebufferBase;
 import net.xuite.blog.ray00000test.game.event.OnEventListener;
@@ -22,14 +22,20 @@ public class GameCanvas extends CanvasDoulbebufferBase implements
 	private NumberFallingNPC mNpc; // 丟數字的npc
 	private Basket mBasket; // 接方塊的籃子
 	private int mScore; // 吃到的數字個數
+	private Direction mDirection;
+	private Random mRandom ;
 
 	public GameCanvas() {
 		inititalize();
 	}
 
 	public void inititalize() {
+		mRandom = new Random();
 		mObjs = Collections.synchronizedList(new ArrayList<RoleBase>());
-
+		
+		//初始化數字要往右飛
+		mDirection = Direction.RIGHT;
+		
 		mBasket = new Basket();
 		mBasket.setParent(this);
 		mBasket.setBounds(0, 250, 30, 8);
@@ -99,15 +105,36 @@ public class GameCanvas extends CanvasDoulbebufferBase implements
 
 	@Override
 	public void onEvent(GameEvent event, Object data) {
+		//npc拋數字出來
 		if (event == GameEvent.POP_NUMBER) {
+			int velocityX = 0;
+			switch(mDirection){
+			case LEFT:
+				velocityX = -mRandom.nextInt(GameConfig.NUMBER_OBJECT_VELOCITY_X_DEFAULT);
+				break;
+			case RIGHT:
+				velocityX = mRandom.nextInt(GameConfig.NUMBER_OBJECT_VELOCITY_X_DEFAULT);
+				break;
+			}
+			
 			NumberObject f = new NumberObject();
 			f.setPaintCountdown(5);// 設定畫5次就變一次顏色
 			f.setX(mNpc.getX());
 			f.setW(25);
 			f.setH(25);
 			f.randScore();
-
+			f.setVelocityX(velocityX);
 			addPaintObj(f);
+			return;
+		}
+		//npc碰到右邊界
+		if(event == GameEvent.NPC_OUT_RIGHT){
+			mDirection = Direction.LEFT;
+			return;
+		}
+		//npc碰到左邊界
+		if(event == GameEvent.NPC_OUT_LEFT){
+			mDirection = Direction.RIGHT;
 			return;
 		}
 	}
@@ -119,6 +146,11 @@ public class GameCanvas extends CanvasDoulbebufferBase implements
 	 */
 	public void setMouseMoveBasketX(int x) {
 		mBasket.setX(x);
+	}
+	
+	public enum Direction{
+		RIGHT,
+		LEFT
 	}
 
 }
