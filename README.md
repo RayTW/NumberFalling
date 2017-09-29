@@ -3,4 +3,4 @@
 
 JAVA swing game, need to install jre 1.6.0.
 
-![](https://github.com/RayTW/NumberFalling/blob/master/preview.png)
+![](https://raw.githubusercontent.com/RayTW/NumberFalling/d121549cb29bed1e57840e4b81d4475d5998a268/preview.png)
